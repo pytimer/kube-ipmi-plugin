@@ -9,3 +9,11 @@ var IPMIConfigurationKeys = []string {
 	"Default Gateway IP",
 	"Default Gateway MAC",
 }
+
+const (
+	IPMIToolPathFlagName = "ipmitool-path"
+	KubeConfigFlagName = "kubeconfig"
+
+	DefaultIPMIToolPath = "ipmitool"
+	DefaultKubeConfigFile = "~/.kube/config"
+)

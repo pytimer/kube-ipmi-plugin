@@ -1,10 +1,14 @@
 package ipmi
 
 import (
+	"fmt"
 	"os/exec"
 	"strings"
 
 	"github.com/pytimer/kube-ipmi-plugin/pkg/constants"
+
+	"k8s.io/klog"
+	"k8s.io/utils/path"
 )
 
 func rawDecode(raw string) map[string]string {
@@ -40,12 +44,7 @@ func filterUsedConfiguration(configurations map[string]string, filters []string)
 	return
 }
 
-func PrintLANConfiguration() (map[string]string, error) {
-	toolPath, err := exec.LookPath("ipmitool")
-	if err != nil {
-		return nil, err
-	}
-
+func PrintLANConfiguration(toolPath string) (map[string]string, error) {
 	out, err := exec.Command(toolPath, "-I", "open", "lan", "print").CombinedOutput()
 	if err != nil {
 		return nil, err
@@ -55,4 +54,25 @@ func PrintLANConfiguration() (map[string]string, error) {
 	used := filterUsedConfiguration(info, constants.IPMIConfigurationKeys)
 
 	return used, nil
+}
+
+func CheckIPMIToolPath(toolPath string) (string, error) {
+	var err error
+	if toolPath == "" {
+		klog.Warningf("The ipmitool path is empty, we should check the default ipmitool path.")
+		toolPath, err = exec.LookPath(constants.DefaultIPMIToolPath)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	exists, err := path.Exists(path.CheckFollowSymlink, toolPath)
+	if err != nil {
+		return toolPath, err
+	}
+	if !exists {
+		return toolPath, fmt.Errorf("impitool path [%s] not exists", toolPath)
+	}
+
+	return toolPath, nil
 }
