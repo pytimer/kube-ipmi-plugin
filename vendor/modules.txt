@@ -1,6 +1,6 @@
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/gogo/protobuf v0.0.0-20171007142547-342cbe0a0415
+# github.com/gogo/protobuf v1.2.1
 github.com/gogo/protobuf/proto
 github.com/gogo/protobuf/sortkeys
 # github.com/golang/protobuf v1.3.1
@@ -40,7 +40,7 @@ golang.org/x/oauth2/internal
 # golang.org/x/sys v0.0.0-20190412213103-97732733099d
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/text v0.3.1-0.20181227161524-e6919f6577db
+# golang.org/x/text v0.3.0
 golang.org/x/text/secure/bidirule
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
@@ -55,11 +55,12 @@ google.golang.org/appengine/internal/base
 google.golang.org/appengine/internal/datastore
 google.golang.org/appengine/internal/log
 google.golang.org/appengine/internal/remote_api
-# gopkg.in/inf.v0 v0.9.0
+# gopkg.in/inf.v0 v0.9.1
 gopkg.in/inf.v0
 # gopkg.in/yaml.v2 v2.2.2
 gopkg.in/yaml.v2
-# k8s.io/api v0.0.0-20190624085159-95846d7ef82a
+# k8s.io/api v0.0.0-20190313235455-40a48860b5ab
+k8s.io/api/core/v1
 k8s.io/api/admissionregistration/v1beta1
 k8s.io/api/apps/v1
 k8s.io/api/autoscaling/v1
@@ -78,7 +79,6 @@ k8s.io/api/batch/v2alpha1
 k8s.io/api/certificates/v1beta1
 k8s.io/api/coordination/v1
 k8s.io/api/coordination/v1beta1
-k8s.io/api/core/v1
 k8s.io/api/policy/v1beta1
 k8s.io/api/events/v1beta1
 k8s.io/api/extensions/v1beta1
@@ -96,41 +96,46 @@ k8s.io/api/settings/v1alpha1
 k8s.io/api/storage/v1
 k8s.io/api/storage/v1alpha1
 k8s.io/api/storage/v1beta1
-# k8s.io/apimachinery v0.0.0-20190624085041-961b39a1baa0
+# k8s.io/apimachinery v0.0.0-20190313205120-d7deff9243b1
+k8s.io/apimachinery/pkg/util/wait
 k8s.io/apimachinery/pkg/api/errors
 k8s.io/apimachinery/pkg/apis/meta/v1
+k8s.io/apimachinery/pkg/types
+k8s.io/apimachinery/pkg/util/strategicpatch
+k8s.io/apimachinery/pkg/api/resource
 k8s.io/apimachinery/pkg/runtime
 k8s.io/apimachinery/pkg/runtime/schema
-k8s.io/apimachinery/pkg/runtime/serializer/streaming
-k8s.io/apimachinery/pkg/types
-k8s.io/apimachinery/pkg/util/net
-k8s.io/apimachinery/pkg/util/sets
-k8s.io/apimachinery/pkg/watch
-k8s.io/apimachinery/pkg/util/errors
-k8s.io/apimachinery/pkg/util/validation
-k8s.io/apimachinery/pkg/runtime/serializer
+k8s.io/apimachinery/pkg/util/intstr
 k8s.io/apimachinery/pkg/util/runtime
-k8s.io/apimachinery/pkg/version
-k8s.io/apimachinery/pkg/fields
-k8s.io/apimachinery/pkg/util/clock
 k8s.io/apimachinery/pkg/util/validation/field
-k8s.io/apimachinery/pkg/api/resource
 k8s.io/apimachinery/pkg/conversion
+k8s.io/apimachinery/pkg/fields
 k8s.io/apimachinery/pkg/labels
 k8s.io/apimachinery/pkg/selection
-k8s.io/apimachinery/pkg/util/intstr
-k8s.io/apimachinery/pkg/conversion/queryparams
+k8s.io/apimachinery/pkg/watch
+k8s.io/apimachinery/pkg/apis/meta/v1/unstructured
 k8s.io/apimachinery/pkg/util/json
+k8s.io/apimachinery/pkg/util/mergepatch
+k8s.io/apimachinery/third_party/forked/golang/json
+k8s.io/apimachinery/pkg/runtime/serializer/streaming
+k8s.io/apimachinery/pkg/util/net
+k8s.io/apimachinery/pkg/util/sets
+k8s.io/apimachinery/pkg/util/errors
+k8s.io/apimachinery/pkg/util/validation
+k8s.io/apimachinery/pkg/conversion/queryparams
 k8s.io/apimachinery/pkg/util/naming
+k8s.io/apimachinery/pkg/runtime/serializer
+k8s.io/apimachinery/pkg/version
+k8s.io/apimachinery/pkg/util/clock
+k8s.io/apimachinery/third_party/forked/golang/reflect
 k8s.io/apimachinery/pkg/runtime/serializer/json
 k8s.io/apimachinery/pkg/runtime/serializer/versioning
 k8s.io/apimachinery/pkg/runtime/serializer/protobuf
 k8s.io/apimachinery/pkg/runtime/serializer/recognizer
 k8s.io/apimachinery/pkg/api/meta
-k8s.io/apimachinery/third_party/forked/golang/reflect
 k8s.io/apimachinery/pkg/util/framer
 k8s.io/apimachinery/pkg/util/yaml
-k8s.io/apimachinery/pkg/apis/meta/v1/unstructured
+k8s.io/apimachinery/pkg/apis/meta/v1beta1
 # k8s.io/client-go v11.0.0+incompatible
 k8s.io/client-go/kubernetes
 k8s.io/client-go/rest
@@ -193,6 +198,8 @@ k8s.io/client-go/util/keyutil
 k8s.io/client-go/tools/clientcmd/api/v1
 # k8s.io/klog v0.3.1
 k8s.io/klog
+# k8s.io/kube-openapi v0.0.0-20190603182131-db7b694dc208
+k8s.io/kube-openapi/pkg/util/proto
 # k8s.io/utils v0.0.0-20190607212802-c55fbcfc754a
 k8s.io/utils/path
 k8s.io/utils/integer
