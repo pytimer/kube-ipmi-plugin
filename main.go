@@ -45,7 +45,7 @@ func main() {
 
 	po := &PluginOptions{}
 	pflag.StringVar(&po.IPMIToolPath, constants.IPMIToolPathFlagName, "", "Path to the ipmitool")
-	pflag.StringVar(&po.KubeConfig, constants.KubeConfigFlagName, constants.DefaultKubeConfigFile, "The kubeconfig use connect to the Kubernetes cluster.")
+	pflag.StringVar(&po.KubeConfig, constants.KubeConfigFlagName, "", "The kubeconfig use connect to the Kubernetes cluster.")
 	pflag.StringVar(&po.Period, constants.PeriodFlagName, constants.DefaultPeriod, "The application worker period.")
 	pflag.StringVar(&po.NodeName, constants.NodeNameFlagName, "", "The ipmi information patch to the node name.")
 	pflag.Parse()

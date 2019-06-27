@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-ipmi-plugin
+  labels:
+    k8s-app: kube-ipmi-plugin
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kube-ipmi-plugin
+  template:
+    metadata:
+      lables:
+        k8s-app: kube-ipmi-plugin
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/os
+                operator: In
+                values:
+                - linux
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+        operator: "Exists"
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+      containers:
+      - name: ipmi-plugin
+        image: pytimer/kube-ipmi-plugin
+        env:
+          - name: NODENAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
