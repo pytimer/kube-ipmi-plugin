@@ -1,0 +1,7 @@
+apiVersion: v1
+appVersion: "1.0"
+description: The plugin collect ipmi info and report the Kubernetes nodes
+name: kube-ipmi-plugin
+version: 0.1
+maintainers:
+  - name: pytimer
