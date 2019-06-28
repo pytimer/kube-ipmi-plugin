@@ -1,0 +1,32 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kube-ipmi-plugin.fullname" . }}-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  verbs:
+  - get
+  - update
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "kube-ipmi-plugin.fullname" . }}-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "kube-ipmi-plugin.fullname" . }}-role
+subjects:
+- kind: ServiceAccount
+  name: {{ include "kube-ipmi-plugin.fullname" . }}-sa
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "kube-ipmi-plugin.fullname" . }}-sa
+  namespace: {{ .Release.Namespace }}

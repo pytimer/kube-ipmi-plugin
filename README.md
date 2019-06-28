@@ -57,5 +57,17 @@ Make sure the plugin install in `$GOPATH/bin`
 Pull the `kube-ipmi-plugin` Docker image and run it. The latest image is `pytimer/kube-ipmi-plugin`, if you want to specified version, you can search this plugin images on dockerhub.
 
 ```sh
-$ docker run -it --rm pytimer/kube-ipmi-plugin
+$ docker run -it --rm --network=host --device=/dev/ipmi0 pytimer/kube-ipmi-plugin
+$ docker run -it --rm --network=host --privileged -v /dev/ipmi0:/dev/ipmi0 pytimer/kube-ipmi-plugin
 ```
+
+### Running the Kubernetes cluster
+
+You can use `helm` to install this plugin if your Kubernetes cluster support helm. If not, you can use Kubernetes manifests to install.
+
+- [charts](deploy/kube-ipmi-plugin)
+
+- [manifests](deploy/manifests)
+
+
+

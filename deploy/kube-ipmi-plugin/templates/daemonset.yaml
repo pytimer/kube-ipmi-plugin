@@ -15,6 +15,7 @@ spec:
         app.kubernetes.io/name: {{ include "kube-ipmi-plugin.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      hostNetwork: true
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -29,6 +30,15 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: /dev/ipmi0
+            name: dev-ipmi0
+      volumes:
+      - name: dev-ipmi0
+        hostPath:
+          path: /dev/ipmi0
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -41,3 +51,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      serviceAccountName: {{ include "kube-ipmi-plugin.fullname" . }}-sa

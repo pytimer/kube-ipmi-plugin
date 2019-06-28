@@ -13,6 +13,8 @@ spec:
       lables:
         k8s-app: kube-ipmi-plugin
     spec:
+      hostNetwork: true
+      serviceAccountName: kube-ipmi-plugin-sa
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -41,3 +43,12 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /dev/ipmi0
+          name: dev-ipmi0
+      volumes:
+      - name: dev-ipmi0
+        hostPath:
+          path: /dev/ipmi0
